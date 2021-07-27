@@ -18,6 +18,7 @@ library(tidyverse)
 library(glmnet)
 library(shiny)
 library(plotly)
+library(glmnet)
 
 # set seed ----
 set.seed(1)
@@ -208,11 +209,11 @@ glmnet_model <- glmnet::cv.glmnet(X_train, Y_train, type.measure = "mse")
 
 # get predictions on test set ----
 preds_lm <- predict(linear_model, test_df_cont) 
-preds_glmnet <- predict.cv.glmnet(glmnet_model, newx = X_test) %>% as.numeric()
+preds_glmnet <- glmnet:::predict.cv.glmnet(glmnet_model, newx = X_test) %>% as.numeric()
 
 # get fitted values ----
 fitted_vals_lm <- fitted.values(linear_model)
-fitted_vals_glm <- predict.cv.glmnet(glmnet_model, newx = X_train) %>% as.numeric()
+fitted_vals_glm <- glmnet:::predict.cv.glmnet(glmnet_model, newx = X_train) %>% as.numeric()
 
 # functio to compare two models ----
 error_scores <- function(x_1, x_2, y){
