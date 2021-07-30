@@ -19,7 +19,7 @@ library(glmnet)
 library(shiny)
 library(plotly)
 library(glmnet)
-
+library(flexdashboard)
 # set seed ----
 set.seed(1)
 
